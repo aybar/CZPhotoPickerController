@@ -83,15 +83,6 @@
 {
   [super viewDidLoad];
 
-#if __IPHONE_7_0
-  self.cancelButton.tintColor = [UIColor whiteColor];
-  self.chooseButton.tintColor = [UIColor whiteColor];
-  self.previewLabel.hidden = YES;
-#endif
-
-  // No toolbar on iPad, use the nav bar. Mimic how Mail.app’s picker works
-
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
     self.toolbar.hidden = YES;
     self.previewLabel.hidden = YES;
 
@@ -100,11 +91,6 @@
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(didCancel:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Use", nil) style:UIBarButtonItemStyleDone target:self action:@selector(didChoose:)];
-  }
-  else {
-    self.toolbar.tintColor = [UIColor blackColor];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-  }
 
   if (self.allowMoveAndScale) {
     // Configure the preview label for the cropping use case
